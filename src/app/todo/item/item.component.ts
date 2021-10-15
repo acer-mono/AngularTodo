@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {TodosService} from "../../todos.service";
 
 export type Item = {
+  id: string;
   text: string;
   isDone: boolean;
 }
@@ -11,11 +13,11 @@ export type Item = {
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
-  @Input() item: Item = {text: '', isDone: false};
+  @Input() item!: Item;
 
   isEditable: boolean = false;
 
-  constructor() {
+  constructor(private todos: TodosService) {
   }
 
   ngOnInit(): void {
@@ -23,5 +25,9 @@ export class ItemComponent implements OnInit {
 
   editOrSave() {
     this.isEditable = !this.isEditable;
+  }
+
+  remove(id: string) {
+    this.todos.removeTodo(id);
   }
 }

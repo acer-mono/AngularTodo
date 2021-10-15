@@ -3,5 +3,5 @@
   <p *ngIf="!isEditable" [ngClass]="{'itemDone': item.isDone}">{{item.text}}</p>
   <input *ngIf="isEditable" [value]="item.text" />
   <button (click)="editOrSave()">{{isEditable ? 'Save' : 'Edit'}}</button>
-  <button>Remove</button>
+  <button (click)="remove(item.id)">Remove</button>
 </div>
